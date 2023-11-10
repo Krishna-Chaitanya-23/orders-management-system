@@ -22,16 +22,16 @@ func main() {
 	appRouter.Use(cors.Default())
 
 	// these are the API endpoints
-	//C
+	//Create
 	appRouter.POST("/ticket/new", endpoints.CreateTicket)
-	//R
+	//Read
 	appRouter.GET("/attendant/:attendantId", endpoints.FetchTicketsByAttendant)
 	appRouter.GET("/tickets/all", endpoints.FetchAllTickets)
 	appRouter.GET("/ticket/:ticketId/", endpoints.FetchTicketById)
-	//U
+	//Update
 	appRouter.PUT("/attendant/edit/:attendantId", endpoints.EditAttendant)
 	appRouter.PUT("/ticket/edit/:ticketId", endpoints.EditTicket)
-	//D
+	//Delete
 	appRouter.DELETE("/ticket/remove/:ticketId", endpoints.RemoveTicket)
 
 	//this starts the server and allows it to listen to requests.
