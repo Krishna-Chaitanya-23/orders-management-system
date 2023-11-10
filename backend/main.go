@@ -25,14 +25,14 @@ func main() {
 	//Create
 	appRouter.POST("/ticket/new", endpoints.CreateTicket)
 	//Read
-	appRouter.GET("/attendant/:attendantId", endpoints.FetchTicketsByAttendant)
-	appRouter.GET("/tickets/all", endpoints.FetchAllTickets)
-	appRouter.GET("/ticket/:ticketId/", endpoints.FetchTicketById)
+	//appRouter.GET("/attendant/:attendantId", endpoints.FetchTicketsByAttendant)
+	//appRouter.GET("/tickets/all", endpoints.FetchAllTickets)
+	//appRouter.GET("/ticket/:ticketId/", endpoints.FetchTicketById)
 	//Update
-	appRouter.PUT("/attendant/edit/:attendantId", endpoints.EditAttendant)
-	appRouter.PUT("/ticket/edit/:ticketId", endpoints.EditTicket)
+	//appRouter.PUT("/attendant/edit/:attendantId", endpoints.EditAttendant)
+	//appRouter.PUT("/ticket/edit/:ticketId", endpoints.EditTicket)
 	//Delete
-	appRouter.DELETE("/ticket/remove/:ticketId", endpoints.RemoveTicket)
+	//appRouter.DELETE("/ticket/remove/:ticketId", endpoints.RemoveTicket)
 
 	//this starts the server and allows it to listen to requests.
 	appRouter.Run(":" + serverPort)
