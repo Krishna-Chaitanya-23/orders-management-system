@@ -23,16 +23,16 @@ func main() {
 
 	// these are the API endpoints
 	//C
-	appRouter.POST("/order/new", endpoints.CreateOrder)
+	appRouter.POST("/ticket/new", endpoints.CreateTicket)
 	//R
-	appRouter.GET("/waiter/:waiterId", endpoints.FetchOrdersByWaiter)
-	appRouter.GET("/orders/all", endpoints.FetchAllOrders)
-	appRouter.GET("/order/:orderId/", endpoints.FetchOrderById)
+	appRouter.GET("/attendant/:attendantId", endpoints.FetchTicketsByAttendant)
+	appRouter.GET("/tickets/all", endpoints.FetchAllTickets)
+	appRouter.GET("/ticket/:ticketId/", endpoints.FetchTicketById)
 	//U
-	appRouter.PUT("/waiter/edit/:waiterId", endpoints.EditWaiter)
-	appRouter.PUT("/order/edit/:orderId", endpoints.EditOrder)
+	appRouter.PUT("/attendant/edit/:attendantId", endpoints.EditAttendant)
+	appRouter.PUT("/ticket/edit/:ticketId", endpoints.EditTicket)
 	//D
-	appRouter.DELETE("/order/remove/:orderId", endpoints.RemoveOrder)
+	appRouter.DELETE("/ticket/remove/:ticketId", endpoints.RemoveTicket)
 
 	//this starts the server and allows it to listen to requests.
 	appRouter.Run(":" + serverPort)
