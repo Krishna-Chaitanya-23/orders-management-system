@@ -168,7 +168,7 @@ func EditTicket(g *gin.Context) {
 		bson.M{"_id": docID},
 		bson.M{
 			"item":      ticket.Item,
-			"itemPrice": ticket.ItemPrice,
+			"itemprice": ticket.ItemPrice,
 			"attendant": ticket.Attendant,
 			"table":     ticket.Table,
 		},
