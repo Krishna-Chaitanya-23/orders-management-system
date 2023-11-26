@@ -1,0 +1,69 @@
+/* Add this to your global CSS file or style object */
+.custom-button {
+    background-color: #562E19; /* Green background color */
+    color: #fff; /* White text color */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px 20px; /* Padding */
+    font-size: 16px; /* Font size */
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+  
+    &:hover {
+      background-color: #c89D7c; /* Darker green on hover */
+      color: black;
+    
+    }
+  }
+
+  .custom-button2 {
+    background-color: #c89D7c; /* Darker green on hover */
+    color: black;
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px 20px; /* Padding */
+    font-size: 16px; /* Font size */
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+  
+    &:hover {
+      background-color: #562E19; /* Green background color */
+      color: #fff; /* White text color */
+    
+    }
+  }
+  
+  .tickets-container {
+    background-image: url('coffee.jpg'); /* Replace with the path to your image */
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the background image */
+    min-height: 100vh; /* Set a minimum height to cover the entire viewport */
+    padding: 20px; /* Add some padding to the container */
+    color: #fff; /* Set text color to white for better contrast */
+  }
+
+  .custom-modal4 {
+    background-color: rgba(255, 255, 255, 0.9); /* Background color with some transparency */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow for a subtle lift effect */
+  }
+
+  .custom-button3 {
+    background-color: #562E19; /* Green background color */
+    color: #fff; /* White text color */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px 20px; /* Padding */
+    font-size: 16px; /* Font size */
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin: 5px; /* Smooth transition on hover */
+  
+    &:hover {
+      background-color: #c89D7c; /* Darker green on hover */
+      color: black;
+    
+    }
+  }
+  .p-3 {
+    backdrop-filter: blur(0px);
+    background-color: rgba(255, 255, 255, 0.8); /* Adjust the alpha value for transparency */
+    padding: 20px;
+  }
