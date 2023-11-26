@@ -8,25 +8,25 @@ import Ticket from './one-ticket.component';
 
 const Tickets = () => {
 
-    const [tickets, setOrders] = useState([])
+    const [tickets, TicketSets] = useState([])
     const [refreshData, setRefreshData] = useState(false)
 
-    const [changeOrder, replaceTicketchange] = useState({"change": false, "id": 0})
+    const [ticketChange, replaceTicketchange] = useState({"change": false, "id": 0})
     const [changeWaiter, serverChange] = useState({"change": false, "id": 0})
     const [newWaiterName, setNewWaiterName] = useState("")
 
-    const [addNewOrder, setAddNewOrder] = useState(false)
-    const [newOrder, setNewOrder] = useState({"Item": "", "Attendant ": "", "Table": 0, "itemprice": 0})
+    const [ticketAdd, TicketSet] = useState(false)
+    const [newTicket, TicketNew] = useState({"Item": "", "Attendant ": "", "Table": 0, "itemprice": 0})
 
     //gets run at initial loadup
     useEffect(() => {
-        getAllOrders();
+        getAllTickets();
     }, [])
 
     //refreshes the page
     if(refreshData){
         setRefreshData(false);
-        getAllOrders();
+        getAllTickets();
     }
 
     return (
@@ -34,18 +34,18 @@ const Tickets = () => {
             
             {/* add new order button */}
             <Container>
-                <Button onClick={() => setAddNewOrder(true)}>Add new order</Button>
+                <Button onClick={() => TicketSet(true)}>Add new order</Button>
             </Container>
 
             {/* list all current orders */}
             <Container>
                 {tickets != null && tickets.map((ticket, i) => (
-                    <Ticket ticketData={ticket} removeOneOrder={removeOneOrder} serverChange={serverChange} replaceTicketchange={replaceTicketchange}/>
+                    <Ticket ticketData={ticket} removeOneTicket={removeOneTicket} serverChange={serverChange} replaceTicketchange={replaceTicketchange}/>
                 ))}
             </Container>
             
             {/* popup for adding a new order */}
-            <Modal show={addNewOrder} onHide={() => setAddNewOrder(false)} centered>
+            <Modal show={ticketAdd} onHide={() => TicketSet(false)} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Add Order</Modal.Title>
                 </Modal.Header>
@@ -53,16 +53,16 @@ const Tickets = () => {
                 <Modal.Body>
                     <Form.Group>
                         <Form.Label >dish</Form.Label>
-                        <Form.Control onChange={(event) => {newOrder.Item = event.target.value}}/>
+                        <Form.Control onChange={(event) => {newTicket.Item = event.target.value}}/>
                         <Form.Label>waiter</Form.Label>
-                        <Form.Control onChange={(event) => {newOrder.Attendant = event.target.value}}/>
+                        <Form.Control onChange={(event) => {newTicket.Attendant = event.target.value}}/>
                         <Form.Label >table</Form.Label>
-                        <Form.Control onChange={(event) => {newOrder.Table = event.target.value}}/>
+                        <Form.Control onChange={(event) => {newTicket.Table = event.target.value}}/>
                         <Form.Label >price</Form.Label>
-                        <Form.Control type="number" onChange={(event) => {newOrder.itemprice = event.target.value}}/>
+                        <Form.Control type="number" onChange={(event) => {newTicket.itemprice = event.target.value}}/>
                     </Form.Group>
-                    <Button onClick={() => addSingleOrder()}>Add</Button>
-                    <Button onClick={() => setAddNewOrder(false)}>Cancel</Button>
+                    <Button onClick={() => TicketAddOne()}>Add</Button>
+                    <Button onClick={() => TicketSet(false)}>Cancel</Button>
                 </Modal.Body>
             </Modal>
             
@@ -77,13 +77,13 @@ const Tickets = () => {
                         <Form.Label >new waiter</Form.Label>
                         <Form.Control onChange={(event) => {setNewWaiterName(event.target.value)}}/>
                     </Form.Group>
-                    <Button onClick={() => changeWaiterForOrder()}>Change</Button>
+                    <Button onClick={() => attendantchangeforTicket()}>Change</Button>
                     <Button onClick={() => serverChange({"change": false, "id": 0})}>Cancel</Button>
                 </Modal.Body>
             </Modal>
 
             {/* popup for changing an order */}
-            <Modal show={changeOrder.change} onHide={() => replaceTicketchange({"change": false, "id": 0})} centered>
+            <Modal show={ticketChange.change} onHide={() => replaceTicketchange({"change": false, "id": 0})} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Change Order</Modal.Title>
                 </Modal.Header>
@@ -91,13 +91,13 @@ const Tickets = () => {
                 <Modal.Body>
                     <Form.Group>
                         <Form.Label >dish</Form.Label>
-                        <Form.Control onChange={(event) => {newOrder.Item = event.target.value}}/>
+                        <Form.Control onChange={(event) => {newTicket.Item = event.target.value}}/>
                         <Form.Label>waiter</Form.Label>
-                        <Form.Control onChange={(event) => {newOrder.Attendant = event.target.value}}/>
+                        <Form.Control onChange={(event) => {newTicket.Attendant = event.target.value}}/>
                         <Form.Label >table</Form.Label>
-                        <Form.Control onChange={(event) => {newOrder.Table = event.target.value}}/>
+                        <Form.Control onChange={(event) => {newTicket.Table = event.target.value}}/>
                         <Form.Label >price</Form.Label>
-                        <Form.Control type="number" onChange={(event) => {newOrder.itemprice = parseFloat(event.target.value)}}/>
+                        <Form.Control type="number" onChange={(event) => {newTicket.itemprice = parseFloat(event.target.value)}}/>
                     </Form.Group>
                     <Button onClick={() => changeSingleOrder()}>Change</Button>
                     <Button onClick={() => replaceTicketchange({"change": false, "id": 0})}>Cancel</Button>
@@ -108,7 +108,7 @@ const Tickets = () => {
     );
 
     //changes the waiter
-    function changeWaiterForOrder(){
+    function attendantchangeforTicket(){
         changeWaiter.change = false
         var url = "http://localhost:5000/attendant/edit/" + changeWaiter.id
         axios.put(url, {
@@ -124,9 +124,9 @@ const Tickets = () => {
 
     //changes the order
     function changeSingleOrder(){
-        changeOrder.change = false;
-        var url = "http://localhost:5000/ticket/edit/" + changeOrder.id
-        axios.put(url, newOrder)
+        ticketChange.change = false;
+        var url = "http://localhost:5000/ticket/edit/" + ticketChange.id
+        axios.put(url, newTicket)
             .then(response => {
             if(response.status == 200){
                 setRefreshData(true)
@@ -135,14 +135,14 @@ const Tickets = () => {
     }
 
     //creates a new order
-    function addSingleOrder(){
-        setAddNewOrder(false)
+    function TicketAddOne(){
+        TicketSet(false)
         var url = "http://localhost:5000/ticket/new"
         axios.post(url, {
-            "Attendant": newOrder.Attendant,
-            "Item": newOrder.Item,
-            "Table": newOrder.Table,
-            "itemprice": parseFloat(newOrder.itemprice)
+            "Attendant": newTicket.Attendant,
+            "Item": newTicket.Item,
+            "Table": newTicket.Table,
+            "itemprice": parseFloat(newTicket.itemprice)
         }).then(response => {
             if(response.status == 200){
                 setRefreshData(true)
@@ -151,19 +151,19 @@ const Tickets = () => {
     }
 
     //gets all the orders
-    function getAllOrders(){
+    function getAllTickets(){
         var url = "http://localhost:5000/tickets"
         axios.get(url, {
             responseType: 'json'
         }).then(response => {
             if(response.status == 200){
-                setOrders(response.data)
+                TicketSets(response.data)
             }
         })
     }
 
     //deletes a single order
-    function removeOneOrder(id){
+    function removeOneTicket(id){
         var url = "http://localhost:5000/ticket/remove/" + id
         axios.delete(url, {
 
